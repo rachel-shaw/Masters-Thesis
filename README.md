@@ -47,5 +47,9 @@ The analyses for this study were written in R and include the following:
      <img width="161" alt="image" src="https://user-images.githubusercontent.com/99918352/186494402-31642f99-842a-44c8-b3b4-586c71cc00d5.png">
 
 All statistical tests were conducted in R Studio (version 1.1.453).
+
+
+
+Rogers, K. B., and G. C. White. 2007. Analysis of movement and habitat use from telemetry data. Pages 625-676 in C. S. Guy, and M. L. Brown, editors. Analysis and interpretation of freshwater fisheries data. American Fisheries Society, Bethesda, Maryland.
      
      
