@@ -18,11 +18,11 @@ The analyses for this study were written in R and include the following:
   
       𝜒𝐿12=2ΣΣ𝑢𝑖𝑗𝑙𝑜𝑔𝑒[𝑢𝑖𝑗/𝐸(𝑢𝑖𝑗)]𝑙𝑖=1𝑛𝑗=1
 
-where E(uij) = ui+u+j/u++. The degrees of freedom were calculated as (I – 1) (n – 1) df, with I being the number of habitat categories and n being the number of sharks. A p-value <0.05 indicates evidence for heterogeneity, signifying individuals were using the various habitats in different proportions.
+    where E(uij) = ui+u+j/u++. The degrees of freedom were calculated as (I – 1) (n – 1) df, with I being the number of habitat categories and n being the number of sharks. A p-value <0.05 indicates evidence for heterogeneity, signifying individuals were using the various habitats in different proportions.
 
-A second chi-square statistic was calculated to examine if selection was occurring for individual habitat types by some of the sharks. The null hypothesis states selection is not occurring in at least some of the sharks. The second chi-square statistic is: 
+    A second chi-square statistic was calculated to examine if selection was occurring for individual habitat types by some of the sharks. The null hypothesis states selection is not occurring in at least some of the sharks. The second chi-square statistic is: 
 
-𝜒𝐿22=2ΣΣ𝑢𝑖𝑗𝑙𝑜𝑔𝑒[𝑢𝑖𝑗/𝐸(𝑢𝑖𝑗)]𝑙𝑖=1𝑛𝑗=1
+      𝜒𝐿22=2ΣΣ𝑢𝑖𝑗𝑙𝑜𝑔𝑒[𝑢𝑖𝑗/𝐸(𝑢𝑖𝑗)]𝑙𝑖=1𝑛𝑗=1
 
 where E(𝑢𝑖𝑗) = 𝜋𝑖𝑢+𝑗 and 𝜋𝑖 is the proportion of available habitat units that are in category i. A p-value <0.05 indicates at least some of the sampled sharks were selective in the types of habitats they used.
 
