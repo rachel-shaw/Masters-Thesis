@@ -42,7 +42,7 @@ The analyses for this study were written in R and include the following:
      
      <img width="429" alt="image" src="https://user-images.githubusercontent.com/99918352/186494345-b851e2d9-2539-4341-a572-5b40fc04af4f.png">
      
-     with confidence intervals being calculated as:
+     with **confidence intervals** being calculated as:
      
      <img width="161" alt="image" src="https://user-images.githubusercontent.com/99918352/186494402-31642f99-842a-44c8-b3b4-586c71cc00d5.png">
 
