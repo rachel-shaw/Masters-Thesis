@@ -141,7 +141,7 @@ library(Deducer)
 likelihood.test(BathyMatrix) # p-value = 2.554e-15  log-likelihood stat = 852.14
 
 #######################################################################################
-#PART 1: EQUATION 14.1
+#PART 1: EQUATION 14.1 (First Chi-Square Statistic)
 
 #base equation: 
 #(x[i,j]*(log(x[i,j]/((y*k)/a)))) and then multiple answer by 2 to get log-likelihood chi squared value
@@ -167,7 +167,7 @@ part1<-sum(part1, na.rm=TRUE)
 part1*2 #=852.1356 IT WORKED CORRECTLY!!!!!!!!!!!!!!
 
 ######################################
-#PART 2: USE EQUATION 14.2
+#PART 2: USE EQUATION 14.2  (Second chi-square statistic)
 
 #base equation: 
 #(x[i,j]*(log(x[i,j]/((y/a)*k))) and then multiple answer by 2 to get log-likelihood chi squared value
@@ -649,41 +649,7 @@ SelRatio[17]-(2.9352*StandErr[17]) #=  for lower CI (can't observe neg value, so
 #the rest are 0
 
 #########################################################################
-##PLOT BOXPLOT WITH 90% CIs
-
-SR<-c(0.1668275,1.858752,3.858336,1.810742,0.2768294,0.1896088,0.04719112,0.05788668,0.03405714,0.0357745,0,0,0,0,0,0.1638011,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-CI_up<-c(0.5139877,3.409524,5.468479,3.080508,0.5511385,0.4010915,0.1747211,0.1854372,0.1260937,0.132452,0,0,0,0,0,0.6064595,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-CI_low<-c(0,0.3079802,2.248193,0.5409757,0.002520255,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-Bathy_bin<- rev(seq(-290,0,10))
-
-Bathy_Plot_Matrix <- matrix(NA, 30,4)
-
-Bathy_Plot_Matrix[,1] <- Bathy_bin
-Bathy_Plot_Matrix[,2] <- SR
-Bathy_Plot_Matrix[,3] <- CI_up
-Bathy_Plot_Matrix[,4] <- CI_low
-
-colnames(Bathy_Plot_Matrix)<-c("bin", "SelRatio", "CI_upper", "CI_lower")
-
-Bathy_df<- as.data.frame(Bathy_Plot_Matrix)
-
-#par(mar=c(5,4,4,2)+0.1) #normal
-#par(mar=c(5.5,4,4,2)+0.1) #give more margin space for x-axis
-
-plot(Bathy_df$bin, Bathy_df$SelRatio, ylim=c(0, 6), xlab="", ylab="Selection Ratio", main="Bathymetry Preference", pch=20, xaxt="n", xlim=c(0,-300))
-axis(1, at=seq(-290, 0, 10), labels=rep("", each=30))
-text(Bathy_df$bin, par("usr")[3]-.15, srt = 60, adj= 1, xpd = TRUE, labels = rev(c("-290 to -300", "-280 to -290", "-270 to -280", "-260 to -270", "-250 to -260",
-                                                                                "-240 to -250", "-250 to -240", "-220 to -230", "-210 to -220", "-200 to -210", 
-                                                                                "-190 to -200", "-180 to -190", "-170 to -180", "-160 to -170", "-150 to -160", 
-                                                                                "-140 to -150", "-130 to -140", "-120 to -130", "-110 to -120", "-100 to -110", 
-                                                                                "-90 to -100", "-80 to -90", "-70 to -80", "-60 to -70", "-50 to -60", "-40 to -50", 
-                                                                                "-30 to -40", "-20 to -30", "-10 to -20", "0 to -10")), cex=.9)
-mtext("Depth (m)", side=1, line=4)
-abline(h=1, lty=2, col="red")
-arrows(Bathy_df$bin, Bathy_df$CI_upper, Bathy_df$bin, Bathy_df$CI_lower, length=0.05, angle=90, code=3, col = 'black')
-
-#########################################################################
-##PLOT BOXPLOT WITH 90% CIs ****ZOOMED IN TO 160 METERS
+##DEPTH/BATHY PLOT BOXPLOT WITH 90% CIs
 
 SR<-c(0.1668275,1.858752,3.858336,1.810742,0.2768294,0.1896088,0.04719112,0.05788668,0.03405714,0.0357745,0,0,0,0,0,0.1638011)
 CI_up<-c(0.5139877,3.409524,5.468479,3.080508,0.5511385,0.4010915,0.1747211,0.1854372,0.1260937,0.132452,0,0,0,0,0,0.6064595)
@@ -704,79 +670,12 @@ Bathy_df<- as.data.frame(Bathy_Plot_Matrix)
 #par(mar=c(5,4,4,2)+0.1) #normal
 #par(mar=c(5.5,4,4,2)+0.1) #give more margin space for x-axis
 
-plot(Bathy_df$bin, Bathy_df$SelRatio, ylim=c(0, 6), xlab="", ylab="Selection Ratio", main="Water Column Depth Preference", pch=20, xaxt="n", xlim=c(0,-150))
+plot(Bathy_df$bin, Bathy_df$SelRatio, ylim=c(0, 6), xlab="", ylab="Selection Ratio", main="", pch=20, xaxt="n", xlim=c(0,-150), cex=1.8, cex.lab=1.45)
 axis(1, at=seq(-150, 0, 10), labels=rep("", each=16))
 text(Bathy_df$bin, par("usr")[3]-.15, srt = 60, adj= 1, xpd = TRUE, labels = rev(c("-150 to -160", 
-                                                                                  "-140 to -150", "-130 to -140", "-120 to -130", "-110 to -120", "-100 to -110", 
-                                                                                  "-90 to -100", "-80 to -90", "-70 to -80", "-60 to -70", "-50 to -60", "-40 to -50", 
-                                                                                  "-30 to -40", "-20 to -30", "-10 to -20", "0 to -10")), cex=.9)
-mtext("Depth (m)", side=1, line=4)
+                                                                                   "-140 to -150", "-130 to -140", "-120 to -130", "-110 to -120", "-100 to -110", 
+                                                                                   "-90 to -100", "-80 to -90", "-70 to -80", "-60 to -70", "-50 to -60", "-40 to -50", 
+                                                                                   "-30 to -40", "-20 to -30", "-10 to -20", "0 to -10")), cex=.95)
+mtext("Depth (m)", side=1, line=4, cex=1.45)
 abline(h=1, lty=2, col="red")
 arrows(Bathy_df$bin, Bathy_df$CI_upper, Bathy_df$bin, Bathy_df$CI_lower, length=0.05, angle=90, code=3, col = 'black')
-
-#########################################################################
-##PLOT BOXPLOT WITH 90% CIs ****ZOOMED IN TO 50 METERS
-
-SR<-c(0.1668275,1.858752,3.858336,1.810742,0.2768294)
-CI_up<-c(0.5139877,3.409524,5.468479,3.080508,0.5511385)
-CI_low<-c(0,0.3079802,2.248193,0.5409757,0.002520255)
-Bathy_bin<- rev(seq(-40,0,10))
-
-Bathy_Plot_Matrix <- matrix(NA, 5,4)
-
-Bathy_Plot_Matrix[,1] <- Bathy_bin
-Bathy_Plot_Matrix[,2] <- SR
-Bathy_Plot_Matrix[,3] <- CI_up
-Bathy_Plot_Matrix[,4] <- CI_low
-
-colnames(Bathy_Plot_Matrix)<-c("bin", "SelRatio", "CI_upper", "CI_lower")
-
-Bathy_df<- as.data.frame(Bathy_Plot_Matrix)
-
-#par(mar=c(5,4,4,2)+0.1) #normal
-#par(mar=c(5.5,4,4,2)+0.1) #give more margin space for x-axis
-
-plot(Bathy_df$bin, Bathy_df$SelRatio, ylim=c(0, 6), xlab="", ylab="Selection Ratio", main="Water Column Depth Preference", pch=20, xaxt="n", xlim=c(0,-40))
-axis(1, at=seq(-40, 0, 10), labels=rep("", each=5))
-text(Bathy_df$bin, par("usr")[3]-.15, srt = 60, adj= 1, xpd = TRUE, labels = rev(c("-40 to -50", 
-                                                                                  "-30 to -40", "-20 to -30", "-10 to -20", "0 to -10")), cex=.9)
-mtext("Depth (m)", side=1, line=4)
-abline(h=1, lty=2, col="red")
-arrows(Bathy_df$bin, Bathy_df$CI_upper, Bathy_df$bin, Bathy_df$CI_lower, length=0.05, angle=90, code=3, col = 'black')
-
-
-
-#########################################################################
-##PLOT BOXPLOT WITH 90% CIs USING NEGATIVE CIs
-
-SR<-c(0.1668275,1.858752,3.858336,1.810742,0.2768294,0.1896088,0.04719112,0.05788668,0.03405714,0.0357745,0,0,0,0,0,0.1638011,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-CI_up<-c(0.5139877,3.409524,5.468479,3.080508,0.5511385,0.4010915,0.1747211,0.1854372,0.1260937,0.132452,0,0,0,0,0,0.6064595,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-CI_low<-c(-0.1803327,0.3079802,2.248193,0.5409757,0.002520255,-0.02187395,-0.08033886,-0.06966382,-0.05797937,-0.060903,0,0,0,0,0,-0.2788573,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
-Bathy_bin<- rev(seq(-290,0,10))
-
-Bathy_Plot_Matrix <- matrix(NA, 30,4)
-
-Bathy_Plot_Matrix[,1] <- Bathy_bin
-Bathy_Plot_Matrix[,2] <- SR
-Bathy_Plot_Matrix[,3] <- CI_up
-Bathy_Plot_Matrix[,4] <- CI_low
-
-colnames(Bathy_Plot_Matrix)<-c("bin", "SelRatio", "CI_upper", "CI_lower")
-
-Bathy_df<- as.data.frame(Bathy_Plot_Matrix)
-
-#par(mar=c(5,4,4,2)+0.1) #normal
-#par(mar=c(5.5,4,4,2)+0.1) #give more margin space for x-axis
-
-plot(Bathy_df$bin, Bathy_df$SelRatio, ylim=c(-13, 25), xlim=c(-300, 0), xlab="", ylab="Selection Ratio", main="Bathymetry Preference (n=18)", pch=20, xaxt="n")
-text(Bathy_df$bin, par("usr")[3]-0.2, srt = 60, adj= 1, xpd = TRUE, labels = c("-290 to -300", "-280 to -290", "-270 to -280", "-260 to -270", "-250 to -260",
-                                                                               "-240 to -250", "-250 to -240", "-220 to -230", "-210 to -220", "-200 to -210", 
-                                                                               "-190 to -200", "-180 to -190", "-170 to -180", "-160 to -170", "-150 to -160", 
-                                                                               "-140 to -150", "-130 to -140", "-120 to -130", "-110 to -120", "-100 to -110", 
-                                                                               "-90 to -100", "-80 to -90", "-70 to -80", "-60 to -70", "-50 to -60", "-40 to -50", 
-                                                                               "-30 to -40", "-20 to -30", "-10 to -20", "0 to -10") , cex=.9)
-mtext("Depth (m)", side=1, line=4)
-abline(h=1, lty=2, col="red")
-arrows(Bathy_df$bin, Bathy_df$CI_upper, Bathy_df$bin, Bathy_df$CI_lower, length=0.05, angle=90, code=3, col = 'black')
-
-
